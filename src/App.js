@@ -6,6 +6,19 @@ import Routes from "./containers/Routes";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/actions";
 import { ClipLoader } from "react-spinners";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faEdit,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
+library.add(
+  fab,
+  faEdit,
+  faChevronLeft
+);
+
 
 function App() {
   const dispatch = useDispatch();
