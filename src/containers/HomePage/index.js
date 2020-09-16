@@ -2,37 +2,37 @@ import React, { useEffect } from "react";
 import { CardColumns, Container, Jumbotron } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
-import BlogCard from "../../components/BlogCard";
-import { blogActions } from "../../redux/actions";
+import ProductCard from "../../components/ProductCard";
+import { productActions } from "../../redux/actions";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.blog.loading);
-  const blogs = useSelector((state) => state.blog.blogs);
+  const loading = useSelector((state) => state.product.loading);
+  const products = useSelector((state) => state.product.products);
 
   useEffect(() => {
-    dispatch(blogActions.blogsRequest());
+    dispatch(productActions.productsRequest());
   }, [dispatch]);
   return (
     <Container>
       <Jumbotron className="text-center">
-        <h1>Social Blog</h1>
+        <h1>Sneaker Store</h1>
         <p>Write about your amazing experiences.</p>
       </Jumbotron>
       {loading ? (
         <ClipLoader color="#f86c6b" size={150} loading={loading} />
       ) : (
         <>
-          {blogs.length ? (
+          {products.length ? (
             <>
               <CardColumns>
-                {blogs.map((blog) => (
-                  <BlogCard blog={blog} key={blog._id} />
+                {products.map((product) => (
+                  <ProductCard product={product} key={product._id} />
                 ))}
               </CardColumns>
             </>
           ) : (
-            <p>There are no blogs</p>
+            <p>There are no products</p>
           )}
         </>
       )}

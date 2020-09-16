@@ -1,3 +1,3 @@
-export * from "./blog.actions";
+export * from "./product.actions";
 export * from "./auth.actions";
 export * from "./alert.actions";

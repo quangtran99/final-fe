@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
 
-const BlogCard = () => {
+const ProductCard = () => {
     return (
         <Card>
           <Card.Img variant="top" src="https://via.placeholder.com/160x100" />
@@ -19,4 +19,4 @@ const BlogCard = () => {
       );
     };
 
-export default BlogCard
+export default ProductCard
