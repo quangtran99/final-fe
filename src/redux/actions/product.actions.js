@@ -96,6 +96,10 @@ const setRedirectTo = (redirectTo) => ({
   payload: redirectTo,
 });
 
+const addProductToCart = (product) => ({
+  type: types.ADD_PRODUCT_TO_CART,
+  payload: {...product, qty: 1}
+})
 
 export const productActions = {
   productsRequest,
@@ -103,5 +107,6 @@ export const productActions = {
   createNewProduct,
   updateProduct,
   deleteProduct,
-  setRedirectTo
+  setRedirectTo,
+  addProductToCart
 };

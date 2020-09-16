@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action) => {
       localStorage.setItem("accessToken", payload.accessToken);
       return {
         ...state,
-        user: { ...payload.data },
+        user: payload.user,
         accessToken: payload.accessToken,
         loading: false,
         isAuthenticated: true,
@@ -55,10 +55,11 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST_FACEBOOK:
       return { ...state, loading: true };
     case types.LOGIN_REQUEST_FACEBOOK_SUCCESS:
-      localStorage.setItem("accessToken", payload.data.accessToken);
+      localStorage.setItem("accessToken", payload.accessToken);
       return {
         ...state,
-        user: payload.data,
+        user: payload.user,
+        accessToken: payload.accessToken,
         isAuthenticated: true,
         loading: false,
       };
@@ -67,10 +68,11 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST_GOOGLE:
       return { ...state, loading: true };
     case types.LOGIN_REQUEST_GOOGLE_SUCCESS:
-      localStorage.setItem("accessToken", payload.data.accessToken);
+      localStorage.setItem("accessToken", payload.accessToken);
       return {
         ...state,
-        user: payload.data,
+        user: payload.user,
+        accessToken: payload.accessToken,
         isAuthenticated: true,
         loading: false,
       };

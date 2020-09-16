@@ -1,12 +1,13 @@
 import React from 'react'
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import Moment from "react-moment";
 
 
-const ProductCard = ({ product, handleClick }) => {
+const ProductCard = ({ product, handleClick, handleBuyNow }) => {
   return (
-    <Card onClick={() => handleClick(product._id)}>
+    <Card>
       <Card.Img
+       onClick={() => handleClick(product._id)}
         variant="top"
         src={
           product?.images?.length
@@ -21,6 +22,7 @@ const ProductCard = ({ product, handleClick }) => {
             ? product.content
             : product.content.slice(0, 99) + "..."}
         </Card.Text>
+        <Button variant="warning" onClick={() => handleBuyNow(product)} >Buy now</Button>
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">

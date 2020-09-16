@@ -24,6 +24,11 @@ function HomePage() {
     history.push(`/products/${id}`);
   };
 
+  const handleBuyNow = (product) => {
+    dispatch(productActions.addProductToCart(product))
+  }
+  
+
   return (
     <Container>
       <Jumbotron className="text-center">
@@ -53,6 +58,7 @@ function HomePage() {
                     product={product}
                     key={product._id}
                     handleClick={handleClickOnProduct}
+                    handleBuyNow={handleBuyNow}
                   />
                 ))}
               </CardColumns>

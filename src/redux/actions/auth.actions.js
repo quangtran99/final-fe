@@ -21,14 +21,14 @@ const loginRequestFacebook = (token) => async (dispatch) => {
   
     try{
       let response = await api.get(`/auth/login/facebook/${token}`)
-      dispatch({type: types.LOGIN_REQUEST_FACEBOOK_SUCCESS, payload: response.data})
-      console.log(response.data)
+      dispatch({type: types.LOGIN_REQUEST_FACEBOOK_SUCCESS, payload: response.data.data})
       //After every time a user logined successfully, we need to add accessToken for later access to API
       api.defaults.headers.common["authorization"] = "Bearer " +  response.data.data.accessToken;
       
-      const name = response;
+      const name = response.data.data.user.name;
       dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
     }catch(error){
+      console.log(error)
       dispatch({type: types.LOGIN_REQUEST_FACEBOOK_FAILURE, payload: error})
     }
   }
@@ -38,12 +38,12 @@ const loginRequestFacebook = (token) => async (dispatch) => {
   
     try{
       let response = await api.get(`/auth/login/google/${token}`)
-      dispatch({type: types.LOGIN_REQUEST_GOOGLE_SUCCESS, payload: response.data})
+      dispatch({type: types.LOGIN_REQUEST_GOOGLE_SUCCESS, payload: response.data.data})
   
       //After every time a user logined successfully, we need to add accessToken for later access to API
       api.defaults.headers.common["authorization"] = "Bearer " + response.data.data.accessToken;
       
-      const name = response;
+      const name = response.data.data.user.name;
       dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
     }catch(error){
       dispatch({type: types.LOGIN_REQUEST_GOOGLE_FAILURE, payload: error})
