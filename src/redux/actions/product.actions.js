@@ -27,7 +27,10 @@ const getSingleProduct = (productId) => async (dispatch) => {
       payload: res.data.data,
     });
   } catch (error) {
-    dispatch({ type: types.GET_SINGLE_PRODUCT_REQUEST_FAILURE, payload: error });
+    dispatch({
+      type: types.GET_SINGLE_PRODUCT_REQUEST_FAILURE,
+      payload: error,
+    });
   }
 };
 
@@ -96,11 +99,6 @@ const setRedirectTo = (redirectTo) => ({
   payload: redirectTo,
 });
 
-const addProductToCart = (product) => ({
-  type: types.ADD_PRODUCT_TO_CART,
-  payload: {...product, qty: 1}
-})
-
 export const productActions = {
   productsRequest,
   getSingleProduct,
@@ -108,5 +106,4 @@ export const productActions = {
   updateProduct,
   deleteProduct,
   setRedirectTo,
-  addProductToCart
 };

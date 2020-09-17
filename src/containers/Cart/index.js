@@ -1,27 +1,17 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import ProductCartCheckOut from "../../components/ProductCartCheckOut";
 
 const Cart = () => {
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.product.products);
+    const history = useHistory();
   return (
     <div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-        </tbody>
-      </Table>
+        <ProductCartCheckOut 
+        
+        />
     </div>
   );
 };

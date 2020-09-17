@@ -17,38 +17,46 @@ const loginRequest = (email, password) => async (dispatch) => {
 };
 
 const loginRequestFacebook = (token) => async (dispatch) => {
-    dispatch({ type: types.LOGIN_REQUEST_FACEBOOK, payload: null})
-  
-    try{
-      let response = await api.get(`/auth/login/facebook/${token}`)
-      dispatch({type: types.LOGIN_REQUEST_FACEBOOK_SUCCESS, payload: response.data.data})
-      //After every time a user logined successfully, we need to add accessToken for later access to API
-      api.defaults.headers.common["authorization"] = "Bearer " +  response.data.data.accessToken;
-      
-      const name = response.data.data.user.name;
-      dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
-    }catch(error){
-      console.log(error)
-      dispatch({type: types.LOGIN_REQUEST_FACEBOOK_FAILURE, payload: error})
-    }
+  dispatch({ type: types.LOGIN_REQUEST_FACEBOOK, payload: null });
+
+  try {
+    let response = await api.get(`/auth/login/facebook/${token}`);
+    dispatch({
+      type: types.LOGIN_REQUEST_FACEBOOK_SUCCESS,
+      payload: response.data.data,
+    });
+    //After every time a user logined successfully, we need to add accessToken for later access to API
+    api.defaults.headers.common["authorization"] =
+      "Bearer " + response.data.data.accessToken;
+
+    const name = response.data.data.user.name;
+    dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: types.LOGIN_REQUEST_FACEBOOK_FAILURE, payload: error });
   }
-  
-  const loginRequestGoogle = (token) => async (dispatch) => {
-    dispatch({ type: types.LOGIN_REQUEST_GOOGLE, payload: null})
-  
-    try{
-      let response = await api.get(`/auth/login/google/${token}`)
-      dispatch({type: types.LOGIN_REQUEST_GOOGLE_SUCCESS, payload: response.data.data})
-  
-      //After every time a user logined successfully, we need to add accessToken for later access to API
-      api.defaults.headers.common["authorization"] = "Bearer " + response.data.data.accessToken;
-      
-      const name = response.data.data.user.name;
-      dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
-    }catch(error){
-      dispatch({type: types.LOGIN_REQUEST_GOOGLE_FAILURE, payload: error})
-    }
+};
+
+const loginRequestGoogle = (token) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_REQUEST_GOOGLE, payload: null });
+
+  try {
+    let response = await api.get(`/auth/login/google/${token}`);
+    dispatch({
+      type: types.LOGIN_REQUEST_GOOGLE_SUCCESS,
+      payload: response.data.data,
+    });
+
+    //After every time a user logined successfully, we need to add accessToken for later access to API
+    api.defaults.headers.common["authorization"] =
+      "Bearer " + response.data.data.accessToken;
+
+    const name = response.data.data.user.name;
+    dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
+  } catch (error) {
+    dispatch({ type: types.LOGIN_REQUEST_GOOGLE_FAILURE, payload: error });
   }
+};
 
 const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
@@ -81,9 +89,22 @@ const logout = () => (dispatch) => {
 };
 
 const setRedirectTo = (redirectTo) => ({
-    type: types.SET_REDIRECT_TO,
-    payload: redirectTo,
-  });
+  type: types.SET_REDIRECT_TO,
+  payload: redirectTo,
+});
+
+const addProductToCart = (productID) => async (dispatch) => {
+  dispatch({ type: types.ADD_PRODUCT_TO_CART_REQUEST, payload: null });
+  try {
+    const res = await api.post(`/users/cart`, { productID, quantity: 1 });
+    dispatch({
+      type: types.ADD_PRODUCT_TO_CART_SUCCESS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    dispatch({ type: types.ADD_PRODUCT_TO_CART_FAILURE, payload: error });
+  }
+};
 
 export const authActions = {
   loginRequest,
@@ -92,5 +113,6 @@ export const authActions = {
   logout,
   setRedirectTo,
   loginRequestFacebook,
-  loginRequestGoogle
+  loginRequestGoogle,
+  addProductToCart,
 };

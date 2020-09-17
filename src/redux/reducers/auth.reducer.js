@@ -1,6 +1,6 @@
 import * as types from "../constants/auth.constants";
 const initialState = {
-  user: {},
+  user: { cart: [] },
   isAuthenticated: false,
   loading: false,
   accessToken: localStorage.getItem("accessToken"),
@@ -78,6 +78,31 @@ const authReducer = (state = initialState, action) => {
       };
     case types.LOGIN_REQUEST_GOOGLE_FAILURE:
       return { ...state, loading: false };
+
+    case types.ADD_PRODUCT_TO_CART_REQUEST:
+      return { ...state, loading: true };
+
+    case types.ADD_PRODUCT_TO_CART_SUCCESS:
+      return {
+        ...state,
+        user: { ...state.user, cart: payload },
+        loading: false,
+      };
+
+    case types.ADD_PRODUCT_TO_CART_FAILURE:
+      return { ...state, loading: false };
+
+    // // payload = {productID:'...', qty: 1}
+    // const item = state.cart.find(product => product._id === payload._id)
+    // if (item) {
+    //   return {...state, cart: state.cart.map(product => {
+    //     if (product._id !== payload._id) return product;
+    //     return {...product, qty: product.qty + payload.qty}
+    //   })}
+    // } else {
+    //   return {...state, cart: [...state.cart, payload]}
+    // }
+
     default:
       return state;
   }

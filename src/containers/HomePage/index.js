@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import PaginationItem from "../../components/PaginationItem";
 import ProductCard from "../../components/ProductCard";
-import { productActions } from "../../redux/actions";
+import { authActions, productActions } from "../../redux/actions";
 
 function HomePage() {
   const [pageNum, setPageNum] = useState(1);
@@ -24,10 +24,9 @@ function HomePage() {
     history.push(`/products/${id}`);
   };
 
-  const handleBuyNow = (product) => {
-    dispatch(productActions.addProductToCart(product))
-  }
-  
+  const handleBuyNow = (productID) => {
+    dispatch(authActions.addProductToCart(productID));
+  };
 
   return (
     <Container>

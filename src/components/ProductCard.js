@@ -1,15 +1,14 @@
-import React from 'react'
-import { Button, Card } from 'react-bootstrap';
+import React from "react";
+import { Button, Card } from "react-bootstrap";
 import Moment from "react-moment";
-import getSymbolFromCurrency from 'currency-symbol-map'
-
+import getSymbolFromCurrency from "currency-symbol-map";
 
 const ProductCard = ({ product, handleClick, handleBuyNow }) => {
-  const vnd =  getSymbolFromCurrency('VND')
+  const vnd = getSymbolFromCurrency("VND");
   return (
     <Card>
       <Card.Img
-       onClick={() => handleClick(product._id)}
+        onClick={() => handleClick(product._id)}
         variant="top"
         src={
           product?.images?.length
@@ -24,8 +23,12 @@ const ProductCard = ({ product, handleClick, handleBuyNow }) => {
             ? product.productName
             : product.productName.slice(0, 99) + "..."}
         </Card.Text>
-        <Button variant="warning" onClick={() => handleBuyNow(product)} >Buy now</Button>
-        <h2>{product.price} {vnd}</h2>
+        <Button variant="warning" onClick={() => handleBuyNow(product._id)}>
+          Buy now
+        </Button>
+        <h2>
+          {product.price} {vnd}
+        </h2>
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">
@@ -39,4 +42,4 @@ const ProductCard = ({ product, handleClick, handleBuyNow }) => {
   );
 };
 
-export default ProductCard
+export default ProductCard;

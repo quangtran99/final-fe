@@ -58,17 +58,6 @@ const productReducer = (state = initialState, action) => {
     case types.SET_REDIRECT_TO:
       return { ...state, redirectTo: payload };
 
-    case types.ADD_PRODUCT_TO_CART:
-      // payload = {productID:'...', qty: 1}
-      const item = state.cart.find(product => product._id === payload._id)
-      if (item) {
-        return {...state, cart: state.cart.map(product => {
-          if (product._id !== payload._id) return product;
-          return {...product, qty: product.qty + payload.qty}
-        })}
-      } else {
-        return {...state, cart: [...state.cart, payload]}
-      }
     default:
       return state;
   }

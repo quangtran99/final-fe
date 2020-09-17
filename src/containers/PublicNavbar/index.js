@@ -7,9 +7,12 @@ import { authActions } from "../../redux/actions";
 const PublicNavbar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loading = useSelector((state) => state.auth.loading);
-  const cart = useSelector((state) => state.product.cart);
-  const productNum = cart.length > 0 ? cart.reduce((sum, product) => (sum + product.qty), 0) : 0;
-  console.log(productNum)
+  const cart = useSelector((state) => state.auth.user.cart);
+  const productNum =
+    cart?.length > 0
+      ? cart.reduce((sum, product) => sum + product.quantity, 0)
+      : 0;
+  console.log(productNum);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(authActions.logout());
