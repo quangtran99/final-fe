@@ -106,6 +106,19 @@ const addProductToCart = (productID) => async (dispatch) => {
   }
 };
 
+const removeProductFromCart = (productID) => async (dispatch) => {
+  dispatch({ type: types.REMOVE_PRODUCT_TO_CART_REQUEST, payload: null });
+  try {
+    await api.delete(`/users/cart/${productID}`);
+    dispatch({
+      type: types.REMOVE_PRODUCT_TO_CART_SUCCESS,
+      payload: productID,
+    });
+  } catch (error) {
+    dispatch({ type: types.REMOVE_PRODUCT_TO_CART_FAILURE, payload: error });
+  }
+};
+
 export const authActions = {
   loginRequest,
   register,
@@ -115,4 +128,5 @@ export const authActions = {
   loginRequestFacebook,
   loginRequestGoogle,
   addProductToCart,
+  removeProductFromCart,
 };

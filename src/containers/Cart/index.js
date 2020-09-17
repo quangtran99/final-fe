@@ -4,14 +4,20 @@ import { useHistory } from "react-router-dom";
 import ProductCartCheckOut from "../../components/ProductCartCheckOut";
 
 const Cart = () => {
-    const dispatch = useDispatch();
-    const products = useSelector((state) => state.product.products);
-    const history = useHistory();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.auth.user.cart);
+  const history = useHistory();
   return (
     <div>
-        <ProductCartCheckOut 
-        
-        />
+      {cart.length ? (
+        <>
+          {cart.map((item) => (
+            <ProductCartCheckOut item={item} />
+          ))}
+        </>
+      ) : (
+        <p>There are no items</p>
+      )}
     </div>
   );
 };

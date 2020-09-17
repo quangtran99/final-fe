@@ -1,7 +1,6 @@
 import * as types from "../constants/auth.constants";
 const initialState = {
   user: { cart: [] },
-  isAuthenticated: false,
   loading: false,
   accessToken: localStorage.getItem("accessToken"),
 };
@@ -102,6 +101,22 @@ const authReducer = (state = initialState, action) => {
     // } else {
     //   return {...state, cart: [...state.cart, payload]}
     // }
+
+    case types.REMOVE_PRODUCT_TO_CART_REQUEST:
+      return { ...state, loading: true };
+
+    case types.REMOVE_PRODUCT_TO_CART_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          cart: state.user.cart.filter((product) => product._id !== payload),
+        },
+        loading: false,
+      };
+
+    case types.REMOVE_PRODUCT_TO_CART_FAILURE:
+      return { ...state, loading: false };
 
     default:
       return state;

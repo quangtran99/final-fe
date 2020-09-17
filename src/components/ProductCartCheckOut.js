@@ -1,7 +1,10 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import getSymbolFromCurrency from "currency-symbol-map";
 
-const ProductCartCheckOut = () => {
+const ProductCartCheckOut = ({ item }) => {
+  const vnd = getSymbolFromCurrency("VND");
+  const total = item.productID.price * item.quantity;
   return (
     <div>
       <Table striped bordered hover>
@@ -16,9 +19,15 @@ const ProductCartCheckOut = () => {
         </thead>
         <tbody>
           <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>{item.productID.productName}</td>
+            <td>
+              {item.productID.price} {vnd}
+            </td>
+            <td>{item.quantity}</td>
+            <td>
+              {total} {vnd}
+            </td>
+            <td>X</td>
           </tr>
         </tbody>
       </Table>
