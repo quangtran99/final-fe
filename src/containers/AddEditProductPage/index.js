@@ -13,8 +13,8 @@ import { productActions } from "../../redux/actions";
 
 const AddEditProductPage = () => {
   const [formData, setFormData] = useState({
-    title: "",
-    content: "",
+    brand: "",
+    productName: "",
     images: null,
   });
   const loading = useSelector((state) => state.product.loading);
@@ -33,8 +33,8 @@ const AddEditProductPage = () => {
       }
       setFormData((formData) => ({
         ...formData,
-        title: selectedProduct.title,
-        content: selectedProduct.content,
+        title: selectedProduct.brand,
+        content: selectedProduct.productName,
         images: selectedProduct.images,
       }));
     }
@@ -51,11 +51,11 @@ const AddEditProductPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { title, content, images } = formData;
+    const { brand, productName, images } = formData;
     if (addOrEdit === "Add") {
-      dispatch(productActions.createNewProduct(title, content, images));
+      dispatch(productActions.createNewProduct(brand, productName, images));
     } else if (addOrEdit === "Edit") {
-      dispatch(productActions.updateProduct(selectedProduct._id, title, content));
+      dispatch(productActions.updateProduct(selectedProduct._id, brand, productName));
     }
   };
 
@@ -113,9 +113,9 @@ const AddEditProductPage = () => {
               <Form.Control
                 type="text"
                 required
-                placeholder="Title"
-                name="title"
-                value={formData.title}
+                placeholder="Brand"
+                name="brand"
+                value={formData.brand}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -123,9 +123,9 @@ const AddEditProductPage = () => {
               <Form.Control
                 as="textarea"
                 rows="10"
-                placeholder="Content"
-                name="content"
-                value={formData.content}
+                placeholder="Product Name"
+                name="Product Name"
+                value={formData.productName}
                 onChange={handleChange}
               />
             </Form.Group>

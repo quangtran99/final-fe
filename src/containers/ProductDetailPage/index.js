@@ -60,7 +60,7 @@ const ProductDetailPage = () => {
         <>
           {product && (
             <div className="mb-5">
-              <h4>{product.title}</h4>
+              <h4>{product.brand}</h4>
 
               <span className="text-muted">
                 @{product?.author?.name} wrote{" "}
@@ -68,7 +68,7 @@ const ProductDetailPage = () => {
               </span>
 
               <hr />
-              <Markdown source={product.content} />
+              <Markdown source={product.productName} />
               <hr />
               {/* <Reactions
                 reactionsData={product.reactions}

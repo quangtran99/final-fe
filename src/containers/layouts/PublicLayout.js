@@ -10,6 +10,7 @@ import AlertMsg from "./Alert";
 import NotFoundPage from "./NotFoundPage";
 import PrivateRoute from "../Routes/PrivateRoute";
 import ProductDetailPage from "../ProductDetailPage";
+import Cart from "../Cart";
 
 const PublicLayout = () => {
   return (
@@ -22,6 +23,7 @@ const PublicLayout = () => {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/products/:id" component={ProductDetailPage} />
+          <Route exact path="/cart" component={Cart} />
           <PrivateRoute
             exact
             path="/product/add"
