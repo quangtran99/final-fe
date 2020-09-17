@@ -12,11 +12,19 @@ const Cart = () => {
   const handleRemove = (productID) => {
     dispatch(authActions.removeProductFromCart(productID));
   };
+
+  const adjustQuantity = (productID, newQuantity) => {
+    dispatch(authActions.adjustProductQuantity(productID, newQuantity));
+  };
   return (
     <div>
       {cart.length ? (
         <>
-          <ProductCartCheckOut cart={cart} handleRemove={handleRemove} />
+          <ProductCartCheckOut
+            cart={cart}
+            handleRemove={handleRemove}
+            adjustQuantity={adjustQuantity}
+          />
         </>
       ) : (
         <p>There are no items</p>

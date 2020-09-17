@@ -119,6 +119,13 @@ const removeProductFromCart = (productID) => async (dispatch) => {
   }
 };
 
+const adjustProductQuantity = (productID, newQuantity) => (dispatch) => {
+  dispatch({
+    type: types.ADJUST_PRODUCT_QUANTITY,
+    payload: { productID, newQuantity },
+  });
+};
+
 export const authActions = {
   loginRequest,
   register,
@@ -129,4 +136,5 @@ export const authActions = {
   loginRequestGoogle,
   addProductToCart,
   removeProductFromCart,
+  adjustProductQuantity,
 };

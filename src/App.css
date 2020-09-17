@@ -1,0 +1,18 @@
+.total-box {
+    display: inline-block;
+    width: 90px;
+    border: 2px solid #000;
+    margin-right: 15px;
+}
+
+.quantity-box {
+    width: 45px;
+    border: none;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px;
+    color: #232529;
+    font-weight: 600;
+    border-right: 1px solid #232529;
+    border-radius: 0;
+}

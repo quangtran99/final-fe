@@ -120,6 +120,20 @@ const authReducer = (state = initialState, action) => {
     case types.REMOVE_PRODUCT_TO_CART_FAILURE:
       return { ...state, loading: false };
 
+    case types.ADJUST_PRODUCT_QUANTITY:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          cart: state.user.cart.map((item) => {
+            if (item.productID._id === payload.productID) {
+              return { ...item, quantity: payload.newQuantity };
+            }
+            return { ...item };
+          }),
+        },
+      };
+
     default:
       return state;
   }
