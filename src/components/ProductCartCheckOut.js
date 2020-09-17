@@ -1,13 +1,15 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 
-const ProductCartCheckOut = ({ item }) => {
+const ProductCartCheckOut = ({ cart, handleRemove }) => {
   const vnd = getSymbolFromCurrency("VND");
-  const total = item.productID.price * item.quantity;
+
   return (
     <div>
-      <Table striped bordered hover>
+      <Table striped bordered hover style={{ textAlign: "center" }}>
         <thead>
           <tr>
             <th>Product Name</th>
@@ -17,19 +19,26 @@ const ProductCartCheckOut = ({ item }) => {
             <th> </th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>{item.productID.productName}</td>
-            <td>
-              {item.productID.price} {vnd}
-            </td>
-            <td>{item.quantity}</td>
-            <td>
-              {total} {vnd}
-            </td>
-            <td>X</td>
-          </tr>
-        </tbody>
+        {cart.map((item) => (
+          <tbody>
+            <tr>
+              <td>{item.productID.productName}</td>
+              <td>
+                {item.productID.price} {vnd}
+              </td>
+              <td>{item.quantity}</td>
+              <td>
+                {item.productID.price * item.quantity} {vnd}{" "}
+              </td>
+              <td>
+                <FontAwesomeIcon
+                  icon={faMinusSquare}
+                  onClick={() => handleRemove(item.productID._id)}
+                />
+              </td>
+            </tr>
+          </tbody>
+        ))}
       </Table>
     </div>
   );

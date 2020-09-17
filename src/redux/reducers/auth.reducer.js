@@ -110,7 +110,9 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: {
           ...state.user,
-          cart: state.user.cart.filter((product) => product._id !== payload),
+          cart: state.user.cart.filter(
+            (product) => product.productID._id !== payload
+          ),
         },
         loading: false,
       };

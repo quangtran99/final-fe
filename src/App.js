@@ -10,15 +10,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faEdit,
   faChevronLeft,
+  faMinusSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
-library.add(
-  fab,
-  faEdit,
-  faChevronLeft
-);
-
+library.add(fab, faEdit, faChevronLeft, faMinusSquare);
 
 function App() {
   const dispatch = useDispatch();
@@ -33,16 +29,16 @@ function App() {
   }, [dispatch]);
   return (
     <>
-    {isAuthenticated === undefined ? (
-      <div className="vh-100 vw-100 d-flex justify-content-center align-items-center">
-        <ClipLoader color="#f86c6b" size={150} loading={true} />
-      </div>
-    ) : (
-      <Router>
-        <Routes />
-      </Router>
-    )}
-  </>
+      {isAuthenticated === undefined ? (
+        <div className="vh-100 vw-100 d-flex justify-content-center align-items-center">
+          <ClipLoader color="#f86c6b" size={150} loading={true} />
+        </div>
+      ) : (
+        <Router>
+          <Routes />
+        </Router>
+      )}
+    </>
   );
 }
 
