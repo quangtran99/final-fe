@@ -47,7 +47,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         accessToken: null,
         isAuthenticated: false,
-        user: null,
+        user: { cart: [] },
         loading: false,
       };
     case types.SET_REDIRECT_TO:
