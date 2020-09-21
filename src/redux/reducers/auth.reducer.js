@@ -34,14 +34,14 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_FAILURE:
     case types.REGISTER_FAILURE:
       return { ...state, loading: false };
-    case types.GET_CURRENT_USER_FAILURE:
-      return { ...state, loading: false };
+
     case types.REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,
       };
     case types.LOGOUT:
+    case types.GET_CURRENT_USER_FAILURE:
       return {
         ...state,
         accessToken: null,
@@ -132,6 +132,15 @@ const authReducer = (state = initialState, action) => {
             return { ...item };
           }),
         },
+      };
+    case types.UPDATE_CART_QUANTITY_REQUEST:
+      return { ...state, loading: true };
+    case types.UPDATE_CART_QUANTITY_FAILURE:
+      return { ...state, loading: false };
+    case types.UPDATE_CART_QUANTITY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

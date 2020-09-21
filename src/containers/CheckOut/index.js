@@ -1,0 +1,228 @@
+import React, { useState } from "react";
+import {
+  Accordion,
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  useAccordionToggle,
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { transactionActions } from "../../redux/actions";
+
+const ChangeStepButtons = ({ eventKey, setEventKey }) => {
+  const key = Number(eventKey);
+  console.log(key, eventKey);
+  return (
+    <>
+      {key > 0 && key < 4 && (
+        <Button variant="light" onClick={() => setEventKey(key - 1 + "")}>
+          Back
+        </Button>
+      )}
+      {key >= 0 && key < 3 && (
+        <Button variant="primary" onClick={() => setEventKey(key + 1 + "")}>
+          Next
+        </Button>
+      )}
+    </>
+  );
+};
+
+const CheckOut = () => {
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    address: "",
+    shipping: "standard",
+    payment: "COD",
+  });
+  const [eventKey, setEventKey] = useState("2");
+
+  const loading = useSelector((state) => state.transaction.loading);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const fillFakeData = () => {
+    setFormData({
+      name: "admin",
+      email: "admin@gmail.com",
+      address: "12 Ton Dan Street, Dist 4",
+    });
+  };
+
+  const submitOrder = () => {
+    dispatch(transactionActions.createNewOrder(formData));
+  };
+
+  return (
+    <Container>
+      <Accordion activeKey={eventKey}>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="0"
+              onClick={() => setEventKey("0")}
+            >
+              Address Information
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <Row>
+                <Col md={{ span: 6, offset: 3 }}>
+                  <Form>
+                    <Form.Group>
+                      <Form.Control
+                        type="text"
+                        placeholder="Name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Control
+                        type="email"
+                        placeholder="Email Address"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Control
+                        type="text"
+                        placeholder="Address"
+                        name="adress"
+                        value={formData.address}
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                    {/* {loading ? (
+                      <Button
+                        className="btn-block"
+                        variant="primary"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Loading...
+                      </Button>
+                    ) : (
+                      <Button
+                        className="btn-block"
+                        type="submit"
+                        variant="primary"
+                      >
+                        Next
+                      </Button>
+                    )} */}
+
+                    {/* TODO: remove fake data */}
+                    <Button
+                      className="btn-block"
+                      type="button"
+                      variant="light"
+                      onClick={fillFakeData}
+                    >
+                      Fill in fake data
+                    </Button>
+                    <ChangeStepButtons
+                      eventKey={eventKey}
+                      setEventKey={setEventKey}
+                    />
+                  </Form>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="1"
+              onClick={() => setEventKey("1")}
+            >
+              Shipping Method
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="1">
+            <Card.Body>
+              <div>Standard * Free ship</div>
+              <ChangeStepButtons
+                eventKey={eventKey}
+                setEventKey={setEventKey}
+              />{" "}
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="2"
+              onClick={() => setEventKey("2")}
+            >
+              Payment Method
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="2">
+            <Card.Body>
+              <div>Cash on Delivery </div>
+              <ChangeStepButtons
+                eventKey={eventKey}
+                setEventKey={setEventKey}
+              />
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="3"
+              onClick={() => setEventKey("3")}
+            >
+              Confirmation
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="3">
+            <Card.Body>
+              <div> Contact: {formData.email}</div>
+              <div> Address: {formData.address}</div>
+              <div> Payment: {formData.payment}</div>
+              <div> Shipping: {formData.shipping}</div>
+              <ChangeStepButtons
+                eventKey={eventKey}
+                setEventKey={setEventKey}
+              />
+              <Button onClick={submitOrder} disabled={loading}>
+                {" "}
+                Complete Order{" "}
+              </Button>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+    </Container>
+  );
+};
+
+export default CheckOut;

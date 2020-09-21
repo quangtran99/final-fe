@@ -7,7 +7,7 @@ import { authActions } from "../../redux/actions";
 const PublicNavbar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loading = useSelector((state) => state.auth.loading);
-  const cart = useSelector((state) => state.auth.user.cart);
+  const cart = useSelector((state) => state.auth.user?.cart);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(authActions.logout());
@@ -18,7 +18,8 @@ const PublicNavbar = () => {
         <i className="fas fa-chart-line" /> Dashboard
       </Nav.Link>
       <Nav.Link as={Link} to="/cart">
-        <i className="fas fa-chart-line" /> Cart ({cart.length})
+        <i className="fas fa-chart-line" /> Cart (
+        {cart?.length ? cart.length : 0})
       </Nav.Link>
       <Nav.Link onClick={handleLogout}>
         <i className="fas fa-sign-out-alt" /> Logout

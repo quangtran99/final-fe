@@ -11,6 +11,7 @@ import NotFoundPage from "./NotFoundPage";
 import PrivateRoute from "../Routes/PrivateRoute";
 import ProductDetailPage from "../ProductDetailPage";
 import Cart from "../Cart";
+import CheckOut from "../CheckOut";
 
 const PublicLayout = () => {
   return (
@@ -24,6 +25,8 @@ const PublicLayout = () => {
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/products/:id" component={ProductDetailPage} />
           <PrivateRoute exact path="/cart" component={Cart} />
+
+          <PrivateRoute exact path="/checkout" component={CheckOut} />
           <PrivateRoute
             exact
             path="/product/add"

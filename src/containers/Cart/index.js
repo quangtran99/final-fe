@@ -16,6 +16,9 @@ const Cart = () => {
   const adjustQuantity = (productID, newQuantity) => {
     dispatch(authActions.adjustProductQuantity(productID, newQuantity));
   };
+  const updateQuantity = (cart) => {
+    dispatch(authActions.updateCartQuantity(cart));
+  };
   return (
     <div>
       {cart.length ? (
@@ -24,6 +27,7 @@ const Cart = () => {
             cart={cart}
             handleRemove={handleRemove}
             adjustQuantity={adjustQuantity}
+            updateQuantity={updateQuantity}
           />
         </>
       ) : (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,8 +7,14 @@ import {
   faPlusSquare,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
-const ProductCartCheckOut = ({ cart, handleRemove, adjustQuantity }) => {
+const ProductCartCheckOut = ({
+  cart,
+  handleRemove,
+  adjustQuantity,
+  updateQuantity,
+}) => {
   const vnd = getSymbolFromCurrency("VND");
 
   return (
@@ -67,6 +73,14 @@ const ProductCartCheckOut = ({ cart, handleRemove, adjustQuantity }) => {
           </tbody>
         ))}
       </Table>
+      <Button onClick={() => updateQuantity(cart)}> Update cart </Button>
+      <Link to="/">
+        <Button onClick={() => updateQuantity(cart)}>Continue Shopping</Button>
+      </Link>
+
+      <Link to="/checkout">
+        <Button onClick={() => updateQuantity(cart)}> Check out</Button>
+      </Link>
     </div>
   );
 };

@@ -126,6 +126,22 @@ const adjustProductQuantity = (productID, newQuantity) => (dispatch) => {
   });
 };
 
+const updateCartQuantity = (cart) => async (dispatch) => {
+  dispatch({ type: types.UPDATE_CART_QUANTITY_REQUEST, payload: null });
+  console.log("check", cart);
+  try {
+    const res = await api.post(`/users/update-quantity`, cart);
+    console.log("abc", res);
+    dispatch({
+      type: types.UPDATE_CART_QUANTITY_SUCCESS,
+      payload: null,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: types.UPDATE_CART_QUANTITY_FAILURE, payload: error });
+  }
+};
+
 export const authActions = {
   loginRequest,
   register,
@@ -137,4 +153,5 @@ export const authActions = {
   addProductToCart,
   removeProductFromCart,
   adjustProductQuantity,
+  updateCartQuantity,
 };
