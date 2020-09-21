@@ -9,7 +9,7 @@ const transactionReducer = (state = initialState, action) => {
     case types.CREATE_TRANSACTION_REQUEST:
       return { ...state, loading: false };
     case types.CREATE_TRANSACTION_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, transaction: payload };
     case types.CREATE_TRANSACTION_FAILURE:
       return { ...state, loading: false };
     default:

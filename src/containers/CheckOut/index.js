@@ -15,7 +15,6 @@ import { transactionActions } from "../../redux/actions";
 
 const ChangeStepButtons = ({ eventKey, setEventKey }) => {
   const key = Number(eventKey);
-  console.log(key, eventKey);
   return (
     <>
       {key > 0 && key < 4 && (
@@ -41,7 +40,7 @@ const CheckOut = () => {
     shipping: "standard",
     payment: "COD",
   });
-  const [eventKey, setEventKey] = useState("2");
+  const [eventKey, setEventKey] = useState("0");
 
   const loading = useSelector((state) => state.transaction.loading);
 
@@ -107,31 +106,7 @@ const CheckOut = () => {
                         onChange={handleChange}
                       />
                     </Form.Group>
-                    {/* {loading ? (
-                      <Button
-                        className="btn-block"
-                        variant="primary"
-                        type="button"
-                        disabled
-                      >
-                        <span
-                          className="spinner-border spinner-border-sm"
-                          role="status"
-                          aria-hidden="true"
-                        ></span>
-                        Loading...
-                      </Button>
-                    ) : (
-                      <Button
-                        className="btn-block"
-                        type="submit"
-                        variant="primary"
-                      >
-                        Next
-                      </Button>
-                    )} */}
 
-                    {/* TODO: remove fake data */}
                     <Button
                       className="btn-block"
                       type="button"
@@ -213,10 +188,13 @@ const CheckOut = () => {
                 eventKey={eventKey}
                 setEventKey={setEventKey}
               />
-              <Button onClick={submitOrder} disabled={loading}>
+              <Link to="/finish-order">
                 {" "}
-                Complete Order{" "}
-              </Button>
+                <Button onClick={submitOrder} disabled={loading}>
+                  {" "}
+                  Complete Order{" "}
+                </Button>{" "}
+              </Link>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
