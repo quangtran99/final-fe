@@ -11,8 +11,8 @@ const ProductCard = ({ product, handleClick, handleBuyNow }) => {
         onClick={() => handleClick(product._id)}
         variant="top"
         src={
-          product?.images?.length
-            ? product.images[0]
+          product?.image?.length
+            ? product.image
             : "https://via.placeholder.com/160x100"
         }
       />

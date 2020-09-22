@@ -20,12 +20,12 @@ const LoginPage = () => {
   });
   const loginWithFacebook = (response) => {
     console.log("facebook", response);
-    dispatch(authActions.loginRequestFacebook(response.accessToken));
+    dispatch(authActions.loginFacebookRequest(response.accessToken));
   };
 
-  const responseGoogle = (response) => {
+  const loginWithGoogle = (response) => {
     console.log("google", response);
-    dispatch(authActions.loginRequestGoogle(response.accessToken));
+    dispatch(authActions.loginGoogleRequest(response.accessToken));
   };
 
   const handleChange = (e) =>
@@ -111,8 +111,8 @@ const LoginPage = () => {
               <GoogleLogin
                 clientId="541133378796-38h1fht8h9jnre44ijv11ovlk3gqbjoe.apps.googleusercontent.com"
                 buttonText="Login"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onSuccess={loginWithGoogle}
+                onFailure={loginWithGoogle}
                 cookiePolicy={"single_host_origin"}
               />
             </p>

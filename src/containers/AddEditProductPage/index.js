@@ -16,6 +16,7 @@ const AddEditProductPage = () => {
     brand: "",
     productName: "",
     images: null,
+    price: null,
   });
   const loading = useSelector((state) => state.product.loading);
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const AddEditProductPage = () => {
         ...formData,
         title: selectedProduct.brand,
         content: selectedProduct.productName,
-        images: selectedProduct.images,
+        image: selectedProduct.image,
+        price: selectedProduct.price,
       }));
     }
   }, [productId, selectedProduct, dispatch]);
@@ -51,11 +53,20 @@ const AddEditProductPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { brand, productName, images } = formData;
+    const { brand, productName, image, price } = formData;
     if (addOrEdit === "Add") {
-      dispatch(productActions.createNewProduct(brand, productName, images));
+      dispatch(
+        productActions.createNewProduct(brand, productName, image, price)
+      );
     } else if (addOrEdit === "Edit") {
-      dispatch(productActions.updateProduct(selectedProduct._id, brand, productName));
+      dispatch(
+        productActions.updateProduct(
+          selectedProduct._id,
+          brand,
+          productName,
+          price
+        )
+      );
     }
   };
 
@@ -81,21 +92,21 @@ const AddEditProductPage = () => {
   }, [redirectTo, dispatch, history]);
 
   const uploadWidget = () => {
-    // window.cloudinary.openUploadWidget(
-    //   {
-    //     cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
-    //     upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
-    //     tags: ["socialBlog", "blogImages"],
-    //   },
-    //   function (error, result) {
-    //     if (result && result.length) {
-    //       setFormData({
-    //         ...formData,
-    //         images: result.map((res) => res.secure_url),
-    //       });
-    //     }
-    //   }
-    // );
+    window.cloudinary.openUploadWidget(
+      {
+        cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+        upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
+      },
+      function (error, result) {
+        console.log("clloud", result);
+        if (result && result.event === "success") {
+          setFormData({
+            ...formData,
+            image: result.info.secure_url,
+          });
+        }
+      }
+    );
   };
 
   return (
@@ -104,7 +115,7 @@ const AddEditProductPage = () => {
         <Col md={{ span: 6, offset: 3 }}>
           <Form onSubmit={handleSubmit}>
             <div className="text-center mb-3">
-              <h1 className="text-primary">{addOrEdit} blog</h1>
+              <h1 className="text-primary">{addOrEdit} Product</h1>
               <p className="lead">
                 <i className="fas fa-user" />
               </p>
@@ -121,33 +132,33 @@ const AddEditProductPage = () => {
             </Form.Group>
             <Form.Group>
               <Form.Control
-                as="textarea"
-                rows="10"
+                type="text"
+                rows="1"
                 placeholder="Product Name"
-                name="Product Name"
+                name="productName"
                 value={formData.productName}
                 onChange={handleChange}
               />
             </Form.Group>
-            {/* <Form.Group>
+            <Form.Group>
               <Form.Control
-                type="file"
-                name="images"
-                multiple
-                accept="image/png image/jpeg image/jpg"
+                type="number"
+                rows="1"
+                placeholder="Price"
+                name="price"
+                value={formData.price}
                 onChange={handleChange}
               />
-            </Form.Group> */}
+            </Form.Group>
             <Form.Group>
-              {formData?.images?.map((image) => (
+              {formData?.image && (
                 <img
-                  src={image}
-                  key={image}
+                  src={formData.image}
                   width="90px"
                   height="60px"
                   alt="blog images"
                 ></img>
-              ))}
+              )}
               <Button variant="info" onClick={uploadWidget}>
                 {addOrEdit} Images
               </Button>

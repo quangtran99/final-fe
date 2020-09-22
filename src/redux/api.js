@@ -29,7 +29,10 @@ api.interceptors.response.use(
   function (error) {
     error = error.response.data;
     console.log("RESPONSE ERROR", error);
-    store.dispatch(alertActions.setAlert(error.message, "danger"));
+    let errorMsg = error.message || error;
+    if (error.errors && error.errors.message)
+      errorMsg = errorMsg + ": " + error.errors.message;
+    store.dispatch(alertActions.setAlert(errorMsg, "danger"));
     return Promise.reject(error);
   }
 );

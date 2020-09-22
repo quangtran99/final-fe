@@ -34,7 +34,9 @@ const getSingleProduct = (productId) => async (dispatch) => {
   }
 };
 
-const createNewProduct = (brand, productName, images) => async (dispatch) => {
+const createNewProduct = (brand, productName, image, price) => async (
+  dispatch
+) => {
   dispatch({ type: types.CREATE_PRODUCT_REQUEST, payload: null });
   try {
     // For uploading file manually
@@ -49,7 +51,12 @@ const createNewProduct = (brand, productName, images) => async (dispatch) => {
     // const res = await api.post("/products", formData);
 
     // Upload images using cloudinary already
-    const res = await api.post("/products", { brand, productName, images });
+    const res = await api.post("/products", {
+      brand,
+      productName,
+      image,
+      price,
+    });
 
     dispatch({
       type: types.CREATE_PRODUCT_SUCCESS,
@@ -61,13 +68,19 @@ const createNewProduct = (brand, productName, images) => async (dispatch) => {
   }
 };
 
-const updateProduct = (productId, brand, productName) => async (dispatch) => {
+const updateProduct = (productId, brand, productName, price) => async (
+  dispatch
+) => {
   dispatch({ type: types.UPDATE_PRODUCT_REQUEST, payload: null });
   try {
     // let formData = new FormData();
     // formData.set("brand", brand);
     // formData.set("productName", productName);
-    const res = await api.put(`/products/${productId}`, { brand, productName });
+    const res = await api.put(`/products/${productId}`, {
+      brand,
+      productName,
+      price,
+    });
 
     dispatch({
       type: types.UPDATE_PRODUCT_SUCCESS,

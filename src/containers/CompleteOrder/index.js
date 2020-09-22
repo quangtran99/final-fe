@@ -1,5 +1,7 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const CompleteOrder = () => {
   const transaction = useSelector((state) => state.transaction.transaction);
@@ -17,6 +19,9 @@ const CompleteOrder = () => {
       <p>Quantity: {transaction?.products[0]?.quantity}</p>
       <p>Total Price:</p>
       <p>Status: </p>
+      <Link to="/">
+        <Button>Continue Shopping</Button>
+      </Link>
     </div>
   );
 };

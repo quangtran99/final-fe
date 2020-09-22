@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../../redux/actions";
@@ -14,19 +14,7 @@ const ProductDetailPage = () => {
   const product = useSelector((state) => state.product.selectedProduct);
   const loading = useSelector((state) => state.product.loading);
   const currentUser = useSelector((state) => state.auth.user);
-//   const submitLoading = useSelector((state) => state.product.subReviewLoading);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const history = useHistory();
-
-//   const [reviewText, setReviewText] = useState("");
-//   const handleInputChange = (e) => {
-//     setReviewText(e.target.value);
-//   };
-//   const handleSubmitReview = (e) => {
-//     e.preventDefault();
-//     dispatch(productActions.createReview(blog._id, reviewText));
-//     setReviewText("");
-//   };
 
   useEffect(() => {
     if (params?.id) {
@@ -70,25 +58,8 @@ const ProductDetailPage = () => {
               <hr />
               <Markdown source={product.productName} />
               <hr />
-              {/* <Reactions
-                reactionsData={product.reactions}
-                targetType="Product"
-                target={product._id}
-                size="lg"
-              /> */}
-              <hr />
-              {/* <ReviewList reviews={product.reviews} /> */}
             </div>
           )}
-
-          {/* {isAuthenticated && (
-            <ReviewBlog
-              reviewText={reviewText}
-              handleInputChange={handleInputChange}
-              handleSubmitReview={handleSubmitReview}
-              loading={submitLoading}
-            />
-          )} */}
         </>
       )}
     </>

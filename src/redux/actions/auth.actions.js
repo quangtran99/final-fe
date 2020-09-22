@@ -16,45 +16,44 @@ const loginRequest = (email, password) => async (dispatch) => {
   }
 };
 
-const loginRequestFacebook = (token) => async (dispatch) => {
-  dispatch({ type: types.LOGIN_REQUEST_FACEBOOK, payload: null });
-
+const loginFacebookRequest = (access_token) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_FACEBOOK_REQUEST, payload: null });
   try {
-    let response = await api.get(`/auth/login/facebook/${token}`);
-    dispatch({
-      type: types.LOGIN_REQUEST_FACEBOOK_SUCCESS,
-      payload: response.data.data,
-    });
-    //After every time a user logined successfully, we need to add accessToken for later access to API
+    const res = await api.post("/auth/login/facebook", { access_token });
+    const name = res.data.data.user.name;
+    dispatch(alertActions.setAlert(`Welcome ${name}`, "success"));
+    dispatch({ type: types.LOGIN_FACEBOOK_SUCCESS, payload: res.data.data });
     api.defaults.headers.common["authorization"] =
-      "Bearer " + response.data.data.accessToken;
-
-    const name = response.data.data.user.name;
-    dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
+      "Bearer " + res.data.data.accessToken;
   } catch (error) {
-    console.log(error);
-    dispatch({ type: types.LOGIN_REQUEST_FACEBOOK_FAILURE, payload: error });
+    dispatch({ type: types.LOGIN_FACEBOOK_FAILURE, payload: error });
   }
 };
 
-const loginRequestGoogle = (token) => async (dispatch) => {
-  dispatch({ type: types.LOGIN_REQUEST_GOOGLE, payload: null });
-
+const loginGoogleRequest = (access_token) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_GOOGLE_REQUEST, payload: null });
   try {
-    let response = await api.get(`/auth/login/google/${token}`);
-    dispatch({
-      type: types.LOGIN_REQUEST_GOOGLE_SUCCESS,
-      payload: response.data.data,
-    });
-
-    //After every time a user logined successfully, we need to add accessToken for later access to API
+    const res = await api.post("/auth/login/google", { access_token });
+    const name = res.data.data.user.name;
+    dispatch(alertActions.setAlert(`Welcome ${name}`, "success"));
+    dispatch({ type: types.LOGIN_GOOGLE_SUCCESS, payload: res.data.data });
     api.defaults.headers.common["authorization"] =
-      "Bearer " + response.data.data.accessToken;
-
-    const name = response.data.data.user.name;
-    dispatch(alertActions.setAlert(`Welcome back, ${name}`, "success"));
+      "Bearer " + res.data.data.accessToken;
   } catch (error) {
-    dispatch({ type: types.LOGIN_REQUEST_GOOGLE_FAILURE, payload: error });
+    dispatch({ type: types.LOGIN_GOOGLE_FAILURE, payload: error });
+  }
+};
+
+const updateProfile = (name, avatarUrl) => async (dispatch) => {
+  dispatch({ type: types.UPDATE_PROFILE_REQUEST, payload: null });
+  try {
+    const res = await api.put("/users", { name, avatarUrl });
+    dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data.data });
+    dispatch(
+      alertActions.setAlert(`Your profile has been updated.`, "success")
+    );
+  } catch (error) {
+    dispatch({ type: types.UPDATE_PROFILE_FAILURE, payload: error });
   }
 };
 
@@ -142,16 +141,37 @@ const updateCartQuantity = (cart) => async (dispatch) => {
   }
 };
 
+const verifyEmail = (code) => async (dispatch) => {
+  dispatch({ type: types.VERIFY_EMAIL_REQUEST, payload: null });
+  try {
+    const res = await api.post("/users/verify_email", { code });
+    dispatch({ type: types.VERIFY_EMAIL_SUCCESS, payload: res.data.data });
+    const name = res.data.data.user.name;
+    dispatch(
+      alertActions.setAlert(
+        `Welcome, ${name}! Your email address has been verified.`,
+        "success"
+      )
+    );
+    api.defaults.headers.common["authorization"] =
+      "Bearer " + res.data.data.accessToken;
+  } catch (error) {
+    dispatch({ type: types.VERIFY_EMAIL_FAILURE, payload: error });
+  }
+};
+
 export const authActions = {
   loginRequest,
   register,
   getCurrentUser,
   logout,
   setRedirectTo,
-  loginRequestFacebook,
-  loginRequestGoogle,
+  loginFacebookRequest,
+  loginGoogleRequest,
   addProductToCart,
   removeProductFromCart,
   adjustProductQuantity,
   updateCartQuantity,
+  updateProfile,
+  verifyEmail,
 };

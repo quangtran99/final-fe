@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../redux/actions";
 
@@ -8,12 +8,14 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loading = useSelector((state) => state.auth.loading);
-
+  const redirectTo = useSelector((state) => state.auth.redirectTo);
+  const history = useHistory();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
+    avatarUrl: "",
   });
   const [errors, setErrors] = useState({
     name: "",
@@ -21,19 +23,37 @@ const RegisterPage = () => {
     password: "",
     password2: "",
   });
-  const handleChange = (e) =>
-{    setFormData({ ...formData, [e.target.name]: e.target.value });}
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, password2 } = formData;
+    const { name, email, password, password2, avatarUrl } = formData;
     if (password !== password2) {
       setErrors({ ...errors, password2: "Passwords do not match" });
       return;
     }
-    dispatch(authActions.register(name, email, password));
+    dispatch(authActions.register(name, email, password, avatarUrl));
   };
 
-  if (isAuthenticated) return <Redirect to="/" />;
+  const uploadWidget = () => {
+    window.cloudinary.openUploadWidget(
+      {
+        cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+        upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
+      },
+      function (error, result) {
+        if (error) console.log(error);
+        if (result && result.event === "success") {
+          setFormData({
+            ...formData,
+            avatarUrl: result.info.secure_url,
+          });
+        }
+      }
+    );
+  };
+
   const fillFakeData = () => {
     setFormData({
       name: "Minh",
@@ -42,6 +62,18 @@ const RegisterPage = () => {
       password2: "123",
     });
   };
+
+  useEffect(() => {
+    if (redirectTo) {
+      if (redirectTo === "__GO_BACK__") {
+        history.goBack();
+        dispatch(authActions.setRedirectTo(""));
+      } else {
+        history.push(redirectTo);
+        dispatch(authActions.setRedirectTo(""));
+      }
+    }
+  }, [dispatch, history, redirectTo]);
 
   return (
     <Container>
@@ -54,6 +86,26 @@ const RegisterPage = () => {
             </p>
           </div>
           <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <div className="text-center">
+                {formData.avatarUrl && (
+                  <div className="mb-3">
+                    <img
+                      src={formData.avatarUrl}
+                      className="avatar-lg"
+                      alt="avatar"
+                    />
+                  </div>
+                )}
+                <Button
+                  variant="info"
+                  // className="btn-block w-50 "
+                  onClick={uploadWidget}
+                >
+                  Add avatar
+                </Button>
+              </div>
+            </Form.Group>
             <Form.Group>
               <Form.Control
                 type="text"
