@@ -19,9 +19,10 @@ const ProductCartCheckOut = ({
 
   return (
     <div>
-      <Table striped bordered hover style={{ textAlign: "center" }}>
+      <Table bordered hover style={{ textAlign: "center" }}>
         <thead>
           <tr>
+            <th></th>
             <th>Product Name</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -32,6 +33,10 @@ const ProductCartCheckOut = ({
         {cart.map((item) => (
           <tbody>
             <tr>
+              <td>
+                {" "}
+                <img className="cart-img" src={item.productID.image}></img>
+              </td>
               <td>{item.productID.productName}</td>
               <td>
                 {item.productID.price} {vnd}
@@ -73,14 +78,53 @@ const ProductCartCheckOut = ({
           </tbody>
         ))}
       </Table>
-      <Button onClick={() => updateQuantity(cart)}> Update cart </Button>
-      <Link to="/">
-        <Button onClick={() => updateQuantity(cart)}>Continue Shopping</Button>
-      </Link>
+      <div>
+        <button className="updateCart-btn" onClick={() => updateQuantity(cart)}>
+          {" "}
+          Update cart{" "}
+        </button>
+      </div>
+      <div>
+        <Link to="/">
+          <button
+            className="continueShopping-btn"
+            onClick={() => updateQuantity(cart)}
+          >
+            Continue Shopping
+          </button>
+        </Link>
+      </div>
 
-      <Link to="/checkout">
-        <Button onClick={() => updateQuantity(cart)}> Check out</Button>
-      </Link>
+      <div className="cart-checkout">
+        <h2 className="cart-total">Cart Total</h2>
+        <hr></hr>
+        <div>
+          <Table striped hover style={{ textAlign: "center" }}>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Total Price</th>
+              </tr>
+            </thead>
+            {cart.map((item) => (
+              <tbody>
+                <tr>
+                  <td>{item.productID.productName}</td>
+                  <td>
+                    {item.productID.price * item.quantity} {vnd}{" "}
+                  </td>
+                </tr>
+              </tbody>
+            ))}
+          </Table>
+        </div>
+        <Link to="/checkout">
+          <button className="checkout-btn" onClick={() => updateQuantity(cart)}>
+            {" "}
+            Check out
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

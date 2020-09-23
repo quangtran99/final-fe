@@ -41,11 +41,12 @@ const PublicNavbar = () => {
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/" className="mr-auto">
         {/* <img src={logo} alt="CoderSchool" /> */}
+        Some Random Shop
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto"></Nav>
-        {!loading && <>{isAuthenticated ? authLinks : publicLinks}</>}
+        {isAuthenticated ? authLinks : publicLinks}
       </Navbar.Collapse>
     </Navbar>
   );

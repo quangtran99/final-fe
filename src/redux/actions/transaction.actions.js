@@ -2,10 +2,10 @@ import * as types from "../constants/transaction.constants";
 import api from "../api";
 import { alertActions } from "./alert.actions";
 
-const createNewOrder = (formData, totalPrice = null) => async (dispatch) => {
+const createNewOrder = (formData) => async (dispatch) => {
   dispatch({ type: types.CREATE_TRANSACTION_REQUEST, payload: null });
   try {
-    const res = await api.post("/transaction", { ...formData, totalPrice });
+    const res = await api.post("/transaction", { ...formData });
 
     dispatch({
       type: types.CREATE_TRANSACTION_SUCCESS,

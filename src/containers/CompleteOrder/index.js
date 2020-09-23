@@ -8,17 +8,21 @@ const CompleteOrder = () => {
   return (
     <div>
       {console.log("abc", transaction)}
-      <h1> Thank you for your purchasing!</h1>
-      <h2>Your order information:</h2>
-      <p>Name: {transaction?.shipping?.fullName}</p>
-      <p>Address: {transaction?.shipping?.address}</p>
-      <p>Order info: </p>
-      <p>Brand:{transaction?.products[0]?.productID?.brand}</p>
-      <p>Product Name: {transaction?.products[0]?.productID?.productName} </p>
-      <p>Price: {transaction?.products[0]?.productID?.price}</p>
-      <p>Quantity: {transaction?.products[0]?.quantity}</p>
-      <p>Total Price:</p>
-      <p>Status: </p>
+      <h1> Thank {transaction?.shipping?.fullName} for your purchasing!</h1>
+      <div className="cart-information">
+        <h2>Your order information:</h2>
+        <div style={{ width: "50vw" }}>
+          <h2>Address:</h2> <p> {transaction?.shipping?.address}</p>
+          <h2>Email:</h2> <p> {transaction?.shipping?.email}</p>
+          <h2>Total Price: </h2> <p>{transaction?.totalPrice}</p>
+        </div>
+        <div style={{ width: "50vw" }}>
+          {" "}
+          <h2>Payment: </h2> <p>{transaction?.payment}</p>
+          <h2>Delivery: </h2> <p>{transaction?.delivery}</p>
+          <h2>Status: </h2> <p> {transaction?.status}</p>
+        </div>
+      </div>
       <Link to="/">
         <Button>Continue Shopping</Button>
       </Link>
