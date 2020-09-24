@@ -59,7 +59,6 @@ function HomePage() {
 
   return (
     <Container>
-      <Jumbotron className="text-center"></Jumbotron>
       {loading ? (
         <ClipLoader color="#f86c6b" size={150} loading={loading} />
       ) : (
