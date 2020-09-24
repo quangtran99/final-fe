@@ -46,7 +46,7 @@ const TransactionPage = () => {
                     <tr>
                       <td>{item.shipping.fullName}</td>
                       <td>{item.shipping.address}</td>
-                      <td>{item.totalPrice}</td>
+                      <td>{item.totalPrice.toLocaleString()}</td>
                       <td>
                         {item.status === "Pending" ? (
                           <Badge variant="warning">Pending</Badge>

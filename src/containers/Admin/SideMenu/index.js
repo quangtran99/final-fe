@@ -26,6 +26,16 @@ const SideMenu = () => {
             Transactions
           </Nav.Link>
         </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            as={NavLink}
+            to="/admin/product/add"
+            activeClassName="active"
+            strict={true}
+          >
+            Post product
+          </Nav.Link>
+        </Nav.Item>
       </div>
     </Nav>
   );

@@ -24,10 +24,6 @@ const ProductDetailPage = () => {
     }
   }, [dispatch, params]);
 
-  const handleGoBackClick = (e) => {
-    history.goBack();
-  };
-
   const handleBuyNow = (productID) => {
     dispatch(authActions.addProductToCart(productID));
   };
@@ -36,7 +32,7 @@ const ProductDetailPage = () => {
     <div>
       <div className="d-flex justify-content-between">
         {currentUser?._id === product?.author?._id ? (
-          <Link to={`/product/edit/${product._id}`}>
+          <Link to={`/admin/product/edit/${product._id}`}>
             <Button variant="primary">
               <FontAwesomeIcon icon="edit" size="1x" /> Edit
             </Button>

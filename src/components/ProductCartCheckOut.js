@@ -42,7 +42,7 @@ const ProductCartCheckOut = ({
               </td>
               <td>{item.productID.productName}</td>
               <td>
-                {item.productID.price} {vnd}
+                {item.productID.price.toLocaleString()} {vnd}
               </td>
               <td>
                 <FontAwesomeIcon
@@ -69,7 +69,7 @@ const ProductCartCheckOut = ({
                 />
               </td>
               <td>
-                {item.productID.price * item.quantity} {vnd}{" "}
+                {(item.productID.price * item.quantity).toLocaleString()} {vnd}{" "}
               </td>
               <td>
                 <FontAwesomeIcon
@@ -114,7 +114,8 @@ const ProductCartCheckOut = ({
                 <tr>
                   <td>{item.productID.productName}</td>
                   <td>
-                    {item.productID.price * item.quantity} {vnd}{" "}
+                    {(item.productID.price * item.quantity).toLocaleString()}{" "}
+                    {vnd}{" "}
                   </td>
                 </tr>
               </tbody>

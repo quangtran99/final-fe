@@ -19,7 +19,7 @@ const PublicNavbar = () => {
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/admin" className="mr-auto">
         {/* <img src={logo} alt="CoderSchool" /> */}
-        Some Random Shop
+        Elahw
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -35,7 +35,7 @@ const PublicNavbar = () => {
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/" className="mr-auto">
         {/* <img src={logo} alt="CoderSchool" /> */}
-        Some Random Shop
+        Elahw
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -62,7 +62,7 @@ const PublicNavbar = () => {
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/" className="mr-auto">
         {/* <img src={logo} alt="CoderSchool" /> */}
-        Some Random Shop
+        Elahw
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

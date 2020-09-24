@@ -14,7 +14,8 @@ const CompleteOrder = () => {
         <div style={{ width: "50vw" }}>
           <h2>Address:</h2> <p> {transaction?.shipping?.address}</p>
           <h2>Email:</h2> <p> {transaction?.shipping?.email}</p>
-          <h2>Total Price: </h2> <p>{transaction?.totalPrice}</p>
+          <h2>Total Price: </h2>{" "}
+          <p>{transaction?.totalPrice.toLocaleString()}</p>
         </div>
         <div style={{ width: "50vw" }}>
           {" "}

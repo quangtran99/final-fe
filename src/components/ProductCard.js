@@ -29,7 +29,7 @@ const ProductCard = ({ product, handleClick, handleBuyNow }) => {
         </p>
         <p>
           {" "}
-          {product.price} {vnd}
+          {product?.price && product.price.toLocaleString()} {vnd}
         </p>
       </div>
     </Col>
