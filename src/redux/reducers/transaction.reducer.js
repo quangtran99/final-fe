@@ -10,6 +10,7 @@ const transactionReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case types.CREATE_TRANSACTION_REQUEST:
+    case types.ORDER_USER_REQUEST:
     case types.UPDATE_ORDER_REQUEST:
     case types.ORDER_REQUEST:
       return { ...state, loading: true };
@@ -23,6 +24,13 @@ const transactionReducer = (state = initialState, action) => {
           if (order._id !== payload._id) return order;
           return payload;
         }),
+      };
+    case types.ORDER_USER_SUCCESS:
+      return {
+        ...state,
+        order: payload.orders,
+        totalPageNum: payload.totalPages,
+        loading: false,
       };
     case types.UPDATE_ORDER_FAILURE:
       return {
@@ -38,6 +46,7 @@ const transactionReducer = (state = initialState, action) => {
       };
 
     case types.ORDER_REQUEST_FAILURE:
+    case types.ORDER_USER_FAILURE:
     case types.CREATE_TRANSACTION_FAILURE:
       return { ...state, loading: false };
     default:

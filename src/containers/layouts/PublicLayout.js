@@ -15,6 +15,7 @@ import CheckOut from "../CheckOut";
 import CompleteOrder from "../CompleteOrder";
 import DashboardPage from "../DashboardPage";
 import VerifyEmailPage from "../VerifyEmailPage";
+import TransactionPage from "../TransactionPage";
 
 const PublicLayout = () => {
   return (
@@ -25,6 +26,7 @@ const PublicLayout = () => {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/verify/:code" component={VerifyEmailPage} />
           <Route exact path="/products/:id" component={ProductDetailPage} />
+          <PrivateRoute exact path="/transaction" component={TransactionPage} />
           <PrivateRoute exact path="/dashboard" component={DashboardPage} />
           <PrivateRoute exact path="/cart" component={Cart} />
           <PrivateRoute exact path="/finish-order" component={CompleteOrder} />

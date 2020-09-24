@@ -44,6 +44,9 @@ const PublicNavbar = () => {
           <Nav.Link as={Link} to="/dashboard">
             <i className="fas fa-chart-line" /> Dashboard
           </Nav.Link>
+          <Nav.Link as={Link} to="/transaction">
+            <i className="fas fa-chart-line" /> Transaction
+          </Nav.Link>
           <Nav.Link as={Link} to="/cart">
             <i className="fas fa-chart-line" /> Cart (
             {cart?.length ? cart.length : 0})

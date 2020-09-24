@@ -26,7 +26,7 @@ const orderRequest = (
 ) => async (dispatch) => {
   dispatch({ type: types.ORDER_REQUEST, payload: null });
   try {
-    const res = await api.get("/transaction");
+    const res = await api.get(`/transaction?page=${pageNum}&limit=${limit}`);
     dispatch({ type: types.ORDER_REQUEST_SUCCESS, payload: res.data.data });
   } catch (error) {
     dispatch({ type: types.ORDER_REQUEST_FAILURE, payload: error });
@@ -43,8 +43,30 @@ const updateStatus = (id) => async (dispatch) => {
   }
 };
 
+const ordersUserRequest = (
+  pageNum = 1,
+  limit = 5,
+  query = null,
+  ownerId = null,
+  sortBy = null
+) => async (dispatch) => {
+  dispatch({ type: types.ORDER_USER_REQUEST, payload: null });
+  try {
+    const res = await api.get(
+      `/transaction/user?page=${pageNum}&limit=${limit}`
+    );
+    dispatch({
+      type: types.ORDER_USER_SUCCESS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    dispatch({ type: types.ORDER_USER_FAILURE, payload: error });
+  }
+};
+
 export const transactionActions = {
   createNewOrder,
   orderRequest,
   updateStatus,
+  ordersUserRequest,
 };
