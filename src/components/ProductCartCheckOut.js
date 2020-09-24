@@ -8,6 +8,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProductCartCheckOut = ({
   cart,
@@ -16,6 +17,8 @@ const ProductCartCheckOut = ({
   updateQuantity,
 }) => {
   const vnd = getSymbolFromCurrency("VND");
+
+  const role = useSelector((state) => state.auth.user.role);
 
   return (
     <div>

@@ -17,4 +17,34 @@ const createNewOrder = (formData) => async (dispatch) => {
   }
 };
 
-export const transactionActions = { createNewOrder };
+const orderRequest = (
+  pageNum = 1,
+  limit = 5,
+  query = null,
+  ownerId = null,
+  sortBy = null
+) => async (dispatch) => {
+  dispatch({ type: types.ORDER_REQUEST, payload: null });
+  try {
+    const res = await api.get("/transaction");
+    dispatch({ type: types.ORDER_REQUEST_SUCCESS, payload: res.data.data });
+  } catch (error) {
+    dispatch({ type: types.ORDER_REQUEST_FAILURE, payload: error });
+  }
+};
+
+const updateStatus = (id) => async (dispatch) => {
+  dispatch({ type: types.UPDATE_ORDER_REQUEST, payload: null });
+  try {
+    const res = await api.put(`/transaction/${id}`);
+    dispatch({ type: types.UPDATE_ORDER_SUCCESS, payload: res.data.data });
+  } catch (error) {
+    dispatch({ type: types.UPDATE_ORDER_FAILURE, payload: error });
+  }
+};
+
+export const transactionActions = {
+  createNewOrder,
+  orderRequest,
+  updateStatus,
+};

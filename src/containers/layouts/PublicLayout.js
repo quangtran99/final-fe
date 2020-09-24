@@ -19,29 +19,16 @@ import VerifyEmailPage from "../VerifyEmailPage";
 const PublicLayout = () => {
   return (
     <>
-      <PublicNavbar />
       <Container>
         <AlertMsg />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/verify/:code" component={VerifyEmailPage} />
           <Route exact path="/products/:id" component={ProductDetailPage} />
           <PrivateRoute exact path="/dashboard" component={DashboardPage} />
           <PrivateRoute exact path="/cart" component={Cart} />
           <PrivateRoute exact path="/finish-order" component={CompleteOrder} />
           <PrivateRoute exact path="/checkout" component={CheckOut} />
-          <PrivateRoute
-            exact
-            path="/product/add"
-            component={AddEditProductPage}
-          />
-          <PrivateRoute
-            exact
-            path="/product/edit/:id"
-            component={AddEditProductPage}
-          />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Container>

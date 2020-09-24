@@ -10,6 +10,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loading = useSelector((state) => state.auth.loading);
+  const user = useSelector((state) => state.auth.user);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -35,8 +36,15 @@ const LoginPage = () => {
     const { email, password } = formData;
     dispatch(authActions.loginRequest(email, password));
   };
-  if (isAuthenticated) return <Redirect to="/" />;
-
+  if (isAuthenticated) {
+    if (user.role === "admin") {
+      return <Redirect to="/admin" />;
+    } else {
+      return <Redirect to="/" />;
+    }
+  }
+  console.log("abc", user);
+  console.log("def", isAuthenticated);
   return (
     <Container>
       <Row>

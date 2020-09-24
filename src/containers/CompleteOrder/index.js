@@ -9,8 +9,8 @@ const CompleteOrder = () => {
     <div>
       {console.log("abc", transaction)}
       <h1> Thank {transaction?.shipping?.fullName} for your purchasing!</h1>
+      <h2>Your order information</h2>
       <div className="cart-information">
-        <h2>Your order information:</h2>
         <div style={{ width: "50vw" }}>
           <h2>Address:</h2> <p> {transaction?.shipping?.address}</p>
           <h2>Email:</h2> <p> {transaction?.shipping?.email}</p>
