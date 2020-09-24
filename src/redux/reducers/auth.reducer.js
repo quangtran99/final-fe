@@ -95,6 +95,12 @@ const authReducer = (state = initialState, action) => {
         loading: false,
       };
 
+    case types.CLEAR_CART_SUCCESS:
+      return {
+        ...state,
+        user: { ...state.user, cart: payload },
+      };
+
     case types.ADD_PRODUCT_TO_CART_FAILURE:
       return { ...state, loading: false };
 

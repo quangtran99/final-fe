@@ -125,6 +125,13 @@ const adjustProductQuantity = (productID, newQuantity) => (dispatch) => {
   });
 };
 
+const clearCart = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_CART_SUCCESS,
+    payload: [],
+  });
+};
+
 const updateCartQuantity = (cart) => async (dispatch) => {
   dispatch({ type: types.UPDATE_CART_QUANTITY_REQUEST, payload: null });
   console.log("check", cart);
@@ -174,4 +181,5 @@ export const authActions = {
   updateCartQuantity,
   updateProfile,
   verifyEmail,
+  clearCart,
 };

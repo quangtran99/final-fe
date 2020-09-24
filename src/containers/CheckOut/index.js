@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { transactionActions } from "../../redux/actions";
+import { authActions, transactionActions } from "../../redux/actions";
 
 const ChangeStepButtons = ({ eventKey, setEventKey }) => {
   const key = Number(eventKey);
@@ -59,6 +59,7 @@ const CheckOut = () => {
 
   const submitOrder = () => {
     dispatch(transactionActions.createNewOrder(formData));
+    dispatch(authActions.clearCart());
   };
 
   return (
