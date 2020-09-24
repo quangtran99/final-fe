@@ -31,6 +31,11 @@ const AdminLayout = () => {
               />
               <Route
                 exact
+                path="/admin/product/edit/:id"
+                component={AddEditProductPage}
+              />
+              <Route
+                exact
                 path="/admin/transaction"
                 component={TransactionPage}
               />
