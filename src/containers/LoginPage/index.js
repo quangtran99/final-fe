@@ -107,18 +107,35 @@ const LoginPage = () => {
             <p>
               Don't have an account? <Link to="/register">Sign Up</Link>
             </p>
-            <p>
-              {" "}
-              Sign in with
+            <p className="d-flex flex-column text-center">
               <FacebookLogin
                 appId="362844698458589"
                 autoLoad={false}
                 fields="name,email,picture"
+                icon="fa-facebook"
                 callback={loginWithFacebook}
+                containerStyle={{
+                  textAlign: "center",
+                  backgroundColor: "#3b5998",
+                  borderColor: "#3b5998",
+                  flex: 1,
+                  display: "flex",
+                  color: "#fff",
+                  cursor: "pointer",
+                  marginBottom: "3px",
+                }}
+                buttonStyle={{
+                  flex: 1,
+                  textTransform: "none",
+                  padding: "12px",
+                  background: "none",
+                  border: "none",
+                }}
               />
               <GoogleLogin
+                className="google-btn d-flex justify-content-center"
                 clientId="541133378796-38h1fht8h9jnre44ijv11ovlk3gqbjoe.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText="Login with Google"
                 onSuccess={loginWithGoogle}
                 onFailure={loginWithGoogle}
                 cookiePolicy={"single_host_origin"}

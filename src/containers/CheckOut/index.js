@@ -36,7 +36,7 @@ const CheckOut = () => {
     name: "",
     email: "",
     address: "",
-    shipping: "standard",
+    shipping: "Standard",
     payment: "COD",
   });
   const [eventKey, setEventKey] = useState("0");
@@ -49,9 +49,11 @@ const CheckOut = () => {
 
   const fillFakeData = () => {
     setFormData({
-      name: "admin",
-      email: "admin@gmail.com",
+      name: "Quang",
+      email: "Quang@gmail.com",
       address: "12 Ton Dan Street, Dist 4",
+      shipping: "Standard",
+      payment: "COD",
     });
   };
 

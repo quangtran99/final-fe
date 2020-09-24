@@ -188,3 +188,13 @@
   height: 15vh;
   width: 10vw;
 }
+
+.google-btn {
+  box-shadow: none !important;
+  border-left: none !important;
+  border: 1px solid gainsboro !important;
+  opacity: 1 !important;
+  font-size: 16px !important;
+  display: flex !important;
+  justify-content: center !important;
+}
