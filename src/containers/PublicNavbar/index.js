@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { authActions } from "../../redux/actions";
+import logo from "../../image/logo.jpg";
 
 const PublicNavbar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -18,7 +19,7 @@ const PublicNavbar = () => {
   const adminLinks = (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/admin" className="mr-auto">
-        {/* <img src={logo} alt="CoderSchool" /> */}
+        <img src={logo} alt="CoderSchool" width="50" height="50" />
         Elahw
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -34,7 +35,7 @@ const PublicNavbar = () => {
   const authLinks = (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/" className="mr-auto">
-        {/* <img src={logo} alt="CoderSchool" /> */}
+        <img src={logo} alt="CoderSchool" width="50" height="50" />
         Elahw
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -61,7 +62,7 @@ const PublicNavbar = () => {
   const publicLinks = (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/" className="mr-auto">
-        {/* <img src={logo} alt="CoderSchool" /> */}
+        <img src={logo} alt="CoderSchool" width="50" height="50" />
         Elahw
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

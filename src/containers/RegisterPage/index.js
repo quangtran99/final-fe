@@ -56,8 +56,8 @@ const RegisterPage = () => {
 
   const fillFakeData = () => {
     setFormData({
-      name: "Minh",
-      email: "minhdh@cs.vn",
+      name: "Quang",
+      email: "todiewhale@gmail.com",
       password: "123",
       password2: "123",
     });

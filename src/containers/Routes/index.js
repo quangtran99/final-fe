@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import LoginPage from "../LoginPage";
 import RegisterPage from "../RegisterPage";
 import PublicNavbar from "../PublicNavbar";
+import Footer from "../Footer";
 
 const Routes = (props) => {
   const auth = useSelector((s) => s.auth);
@@ -29,6 +30,7 @@ const Routes = (props) => {
         <Route exact path="/login" component={LoginPage} />
         <Route path="/" component={renderLayout}></Route>
       </Switch>
+      <Footer />
     </>
   );
 };
