@@ -3,7 +3,7 @@ import store from "./store";
 import { alertActions } from "./actions";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: process.env.BACKEND_URL,
   headers: {
     "Content-Type": "application/json",
   },
