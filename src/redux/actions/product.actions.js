@@ -4,14 +4,14 @@ import { alertActions } from "./alert.actions";
 
 const productsRequest = (
   pageNum = 1,
-  limit = 10,
+  limit = 9,
   query = null,
   ownerId = null,
   sortBy = null
 ) => async (dispatch) => {
   dispatch({ type: types.PRODUCT_REQUEST, payload: null });
   try {
-    const res = await api.get("/products");
+    const res = await api.get(`/products?page=${pageNum}&limit=${limit}`);
     dispatch({ type: types.PRODUCT_REQUEST_SUCCESS, payload: res.data.data });
   } catch (error) {
     dispatch({ type: types.PRODUCT_REQUEST_FAILURE, payload: error });
