@@ -60,25 +60,27 @@ function HomePage() {
 
   return (
     <Container>
-      {loading ? (
-        <ClipLoader color="#f86c6b" size={150} loading={loading} />
-      ) : (
-        <>
-          {products.length ? (
-            <>
-              {generateCard(products)}
-              <PaginationItem
-                pageNum={pageNum}
-                setPageNum={setPageNum}
-                totalPageNum={totalPageNum}
-                loading={loading}
-              />
-            </>
-          ) : (
-            <p style={{ height: "100vh" }}>There are no products</p>
-          )}
-        </>
-      )}
+      <div style={{ minHeight: "100vh" }}>
+        {loading ? (
+          <ClipLoader color="#f86c6b" size={150} loading={loading} />
+        ) : (
+          <>
+            {products.length ? (
+              <>
+                {generateCard(products)}
+                <PaginationItem
+                  pageNum={pageNum}
+                  setPageNum={setPageNum}
+                  totalPageNum={totalPageNum}
+                  loading={loading}
+                />
+              </>
+            ) : (
+              <p style={{ height: "100vh" }}>There are no products</p>
+            )}
+          </>
+        )}
+      </div>
     </Container>
   );
 }
