@@ -44,6 +44,7 @@ function HomePage() {
           let product = products[i + j];
           cols.push(
             <ProductCard
+              style={{ height: "100vh" }}
               product={product}
               key={product._id}
               handleClick={handleClickOnProduct}
