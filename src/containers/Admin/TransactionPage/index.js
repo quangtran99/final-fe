@@ -24,7 +24,7 @@ const TransactionPage = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ height: "100vh" }}>
       {loading ? (
         <ClipLoader color="#f86c6b" size={150} loading={loading} />
       ) : (
@@ -76,7 +76,7 @@ const TransactionPage = () => {
               />
             </>
           ) : (
-            <p>There are no orders</p>
+            <p style={{ height: "100vh" }}>There are no orders</p>
           )}
         </>
       )}

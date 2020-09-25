@@ -29,7 +29,7 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <div>
+    <div style={{ height: "100vh" }}>
       <div className="d-flex justify-content-between">
         <span className="text-muted">
           {product?.author?.name} posted{" "}

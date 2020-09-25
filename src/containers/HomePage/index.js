@@ -74,7 +74,7 @@ function HomePage() {
               />
             </>
           ) : (
-            <p>There are no products</p>
+            <p style={{ height: "100vh" }}>There are no products</p>
           )}
         </>
       )}

@@ -18,7 +18,7 @@ const Cart = () => {
     dispatch(authActions.updateCartQuantity(cart));
   };
   return (
-    <div>
+    <div style={{ height: "100vh" }}>
       {cart.length ? (
         <>
           <ProductCartCheckOut
