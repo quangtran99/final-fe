@@ -12,11 +12,11 @@ const VerifyEmailPage = () => {
   const loading = useSelector((state) => state.auth.loading);
 
   useEffect(() => {
-    if (params?.code && params.code !== "_" && !isAuthenticated) {
+    if (params?.code && params.code !== "_" && !isAuthenticated && !loading) {
       console.log(params.code);
       dispatch(authActions.verifyEmail(params.code));
     }
-  }, [dispatch, params]);
+  }, [dispatch, params.code, loading]);
 
   if (isAuthenticated) return <Redirect to="/" />;
   return (
